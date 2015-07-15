@@ -15,6 +15,9 @@
 #include <delayimp.h>
 #include <string.h>
 
+#ifdef _MANAGED
+#pragma unmanaged
+#endif
 static FARPROC WINAPI load_exe_hook(unsigned int event, DelayLoadInfo* info) {
   HMODULE m;
   if (event != dliNotePreLoadLibrary)
@@ -28,6 +31,9 @@ static FARPROC WINAPI load_exe_hook(unsigned int event, DelayLoadInfo* info) {
   return (FARPROC) m;
 }
 
+#ifdef _MANAGED
+#pragma unmanaged
+#endif
 PfnDliHook __pfnDliNotifyHook2 = load_exe_hook;
 
 #endif
